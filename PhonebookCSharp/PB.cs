@@ -31,12 +31,28 @@ namespace PhonebookCSharp
         }
         public static void DeleteAbonent (Dictionary<string, List<object>> phoneBook)
         {
-            Console.Write("Введите имя абонента для удаления: ");
             string name = Console.ReadLine();
             if (phoneBook.ContainsKey($"{name}"))
             {
                 phoneBook.Remove(name);
                 Console.WriteLine("Абонент удален!");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("Такого абонента не существует!");
+                Console.ReadKey();
+            }
+        }
+        public static void ChangeAbonent (Dictionary<string, List<object>> dictionery)
+        {
+            Console.Write("Введите имя абонента для редактирования: ");
+            string name = Console.ReadLine();
+            if (dictionery.ContainsKey($"{name}"))
+            {
+                DeleteAbonent(dictionery);
+                AddSubscriber(dictionery);
+                Console.WriteLine("Абонент изменен!");
                 Console.ReadKey();
             }
             else
