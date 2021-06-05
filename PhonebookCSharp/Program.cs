@@ -23,6 +23,7 @@ namespace PhonebookCSharp
                     case 2:
                         break;
                     case 3:
+                        PB.DeleteAbonent(phoneBook);
                         break;
                     case 4:
                         SPB.ShowAbonent(phoneBook);

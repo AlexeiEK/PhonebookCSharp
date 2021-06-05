@@ -36,10 +36,13 @@ namespace PhonebookCSharp
             if (phoneBook.ContainsKey($"{name}"))
             {
                 phoneBook.Remove(name);
+                Console.WriteLine("Абонент удален!");
+                Console.ReadKey();
             }
             else
             {
                 Console.WriteLine("Такого абонента не существует!");
+                Console.ReadKey();
             }
         }
     }
