@@ -21,7 +21,7 @@ namespace PhonebookCSharp
                         PB.AddSubscriber(phoneBook);
                         Console.Clear(); break;
                     case 2:
-                        PB.ChangeAbonent(phoneBook);
+                        PB.ChangeAbonent(phoneBook); //переделаю, пока времени не было
                         break;
                     case 3:
                         Console.Write("Введите имя абонента для удаления: ");
