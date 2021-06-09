@@ -5,60 +5,36 @@ namespace PhonebookCSharp
 {
     public static class PB
     {
-        public static void AddSubscriber(Dictionary<string, List<object>> phoneBook)
+        public static void AddSubscriber(Dictionary<string, List<string>> phoneBook, string name)
         {
-            string name;
-            Console.Write("Введите имя: ");
-            do
-            {
-                name = Console.ReadLine();
-                if (phoneBook.ContainsKey($"{name}")) Console.Write("Такое имя существует! Введите другое: ");
-            } while (phoneBook.ContainsKey($"{name}"));
             bool exit;
-            var phones = new List<object>();
+            var phones = new List<string>();
             do
             {
-                Console.Write("Введите номер телефона: ");
+                CLI.InputPhone();
                 phones.Add(Console.ReadLine());
-                Console.WriteLine("Добавить ещё телефон (ДА/НЕТ)?");
-                string exitQuestion = Console.ReadLine().ToUpper();
-                if (exitQuestion == "ДА" || exitQuestion == "YES") exit = true;
-                else exit = false;
+                CLI.InputPhoneOther();
+                exit = CLI.YesNo();
             } while (exit);
             phoneBook.Add(name, phones);
-            Console.WriteLine("Запись сохранена!");
+            CLI.Saved();
             Console.ReadKey();
         }
-        public static void DeleteAbonent (Dictionary<string, List<object>> phoneBook)
+        public static void DeleteAbonent(Dictionary<string, List<string>> phoneBook, string name)
         {
-            string name = Console.ReadLine();
-            if (phoneBook.ContainsKey($"{name}"))
-            {
-                phoneBook.Remove(name);
-                Console.WriteLine("Абонент удален!");
-                Console.ReadKey();
-            }
-            else
-            {
-                Console.WriteLine("Такого абонента не существует!");
-                Console.ReadKey();
-            }
+            phoneBook.Remove(name);
         }
-        public static void ChangeAbonent (Dictionary<string, List<object>> dictionery)
+        public static void ChangeAbonent(Dictionary<string, List<string>> dictionery, string name)
         {
-            Console.Write("Введите имя абонента для редактирования: ");
-            string name = Console.ReadLine();
             if (dictionery.ContainsKey($"{name}"))
             {
-                DeleteAbonent(dictionery);
-                AddSubscriber(dictionery);
-                Console.WriteLine("Абонент изменен!");
-                Console.ReadKey();
+                DeleteAbonent(dictionery, name);
+                AddSubscriber(dictionery, name);
+                CLI.WarningChenge();
             }
             else
             {
-                Console.WriteLine("Такого абонента не существует!");
-                Console.ReadKey();
+                CLI.WarningNoName();
             }
         }
     }

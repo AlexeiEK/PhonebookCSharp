@@ -5,27 +5,28 @@ namespace PhonebookCSharp
 {
     public static class SPB
     {
-        public static void ShowDictionery(Dictionary<string, List<object>> dictionery)
+        public static void ShowDictionery(Dictionary<string, List<string>> dictionery)
         {
             foreach (var item in dictionery)
             {
-                Console.Write($"{item.Key} - {item.Value}\t");
+                var number = 0;
+                Console.Write($"{item.Key} - ");
+                foreach (var phone in item.Value)
+                {
+                    Console.Write($"{++number}) {phone}\t");
+                }
                 Console.WriteLine();
             }
         }
-        public static void ShowAbonent (Dictionary<string, List<object>> dictionery)
+        public static void ShowAbonent(Dictionary<string, List<string>> dictionery, string name)
         {
-            Console.Write("Введите имя абонента: ");
-            string name = Console.ReadLine();
-            if (dictionery.ContainsKey($"{name}"))
+            var number = 0;
+            Console.Write($"{name} - ");
+            foreach (var phone in dictionery[name])
             {
-                Console.Write($"{dictionery[name]}\t");
-                Console.WriteLine();
+                Console.Write($"{++number}) {phone}\t");
             }
-            else
-            {
-                Console.WriteLine("Такого абонента не существует!");
-            }
+            Console.WriteLine();
         }
         public static void ShowMenu()
         {
